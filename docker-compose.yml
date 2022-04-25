@@ -1,7 +1,7 @@
 version: "3"
 services:
   krakend:
-    image: boligmappa_krakend
+    image: krakend_image
     build:
       context: ./
       dockerfile: .
@@ -10,7 +10,7 @@ services:
     ports:
       - 4502:8080
       - 8099:8099
-    container_name: boligmappa_krakend_local
+    container_name: krakend_api_gateway
 
 volumes:
   krakend_data:
