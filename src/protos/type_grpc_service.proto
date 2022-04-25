@@ -1,0 +1,30 @@
+﻿syntax = "proto3";
+
+option go_package = "./";
+
+package typegrpcservice;
+
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+
+service TypeGrpcService {
+    rpc GetProfessionTypes (PaginationRequest) returns (ProfessionTypesResponse){
+        option (google.api.http) = {
+            get: "/v1/profftype"
+        };
+    }
+}
+
+message PaginationRequest {
+    int32 page = 1;
+    int32 pageSize = 2;
+}
+
+message ProfessionTypesResponse {
+    repeated ProfessionType professionTypes = 1;
+}
+
+message ProfessionType {
+    google.protobuf.Int32Value id = 1;
+    google.protobuf.StringValue name = 2;
+}

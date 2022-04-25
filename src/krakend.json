@@ -1,0 +1,44 @@
+{
+    "version": 3,
+    "name": "My lovely gateway",
+    "port": 8080,
+    "cache_ttl": "3600s",
+    "timeout": "3s",
+    "plugin": {
+        "pattern": ".so",
+        "folder": "/workspace/src"
+    },
+    "extra_config": {
+        "telemetry/logging": {
+            "level": "INFO",
+            "prefix": "[KRAKEND]",
+            "syslog": true,
+            "stdout": true,
+            "format": "custom",
+            "custom_format": "%{message}"
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/v1/profftype",
+            "backend": [
+                {
+                    "url_pattern": "v1/profftype",
+                    "method": "GET",
+                    "host": [
+                        "service.name:3000"
+                    ],
+                    "extra_config": {
+                        "github.com/devopsfaith/krakend/transport/http/client/executor": {
+                            "name": "grpc-services",
+                            "endpoints": [
+                                "service.name:3000"
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "output_encoding": "json"
+}

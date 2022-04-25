@@ -1,0 +1,17 @@
+version: "3"
+services:
+  krakend:
+    image: boligmappa_krakend
+    build:
+      context: ./
+      dockerfile: .
+    volumes:
+      - krakend_data:/krakend
+    ports:
+      - 4502:8080
+      - 8099:8099
+    container_name: boligmappa_krakend_local
+
+volumes:
+  krakend_data:
+    external: true
